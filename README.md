@@ -193,7 +193,7 @@ Open `http://127.0.0.1:5001`, then check experiment `enterprise-ai-copilot`:
 ## Demo Media
 
 <a href="https://www.youtube.com/watch?v=5G9gYdbi9H4">
-  <img src="./IMAGE/demo-thumbnail.png" alt="Watch Enterprise AI Copilot Demo on YouTube" width="338" style="max-width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block;" />
+  <img src="./IMAGE/demo-thumbnail.png" alt="Watch Enterprise AI Copilot Demo on YouTube" width="338" style="max-width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;" />
 </a>
 
 <img src="./IMAGE/copilot-main.png" alt="Enterprise AI Copilot chat view" width="600" style="max-width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block;" />
