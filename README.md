@@ -4,7 +4,42 @@
 Enterprise knowledge is fragmented across PDFs, Jira, Slack, APIs, and SQL systems. Keyword search misses intent and slows decisions.
 
 ## Solution
-Production-style FastAPI copilot with Databricks-backed agentic RAG:
+
+I built a Databricks Mosaic AI agentic RAG copilot with Vector Search, UC-style tool calling, JWT RBAC, and MLflow evaluation for production-grade enterprise retrieval. So, basically a :Nice, this is a perfect use case to explain with restaurant analogy. Keep it simple like this:
+
+
+
+## 🍽️ How it works (lemme explain it in Restaurant style)
+
+1. **Customer places order (User Query)**
+   You walk into a restaurant and tell the waiter what you want.
+   → This is your question going to FastAPI
+
+2. **Waiter checks your access (Auth + RBAC)**
+   Waiter checks if you are allowed special menu or not.
+   → This is JWT + role-based access
+
+3. **Waiter decides what to do (MCP Router)**
+   Waiter decides: should I check menu, ask chef, or call manager?
+   → This is tool routing (RAG vs tools vs DB)
+
+4. **Kitchen finds ingredients (Vector Search - RAG)**
+   Kitchen searches pantry for best ingredients related to your order.
+   → This is Databricks Vector Search retrieving context
+
+5. **Chef cooks dish (Model + Tools)**
+   Chef prepares food using ingredients + maybe asks manager (tools like Jira/SQL).
+   → This is LLM + UC function tool calling
+
+6. **Dish served + feedback tracked (Response + MLflow)**
+   Waiter serves food and restaurant tracks if you liked it for improvement.
+   → This is streaming response + MLflow evaluation
+
+
+So,
+
+A Production-style FastAPI copilot with Databricks-backed agentic RAG:
+
 - Databricks Mosaic Vector Search retrieval
 - Databricks Model Serving response generation
 - UC Function-style tool calling through Databricks SQL Statements API
@@ -49,7 +84,6 @@ User Browser/UI
 - DevOps:
   - Poetry (`pyproject.toml`)
   - `Makefile` targets
-  - `poet` + `poet_install_make_dev.sh` bootstrap command
   - Dockerfile, docker-compose
   - ECS task definition template
 
@@ -61,7 +95,6 @@ User Browser/UI
 
 ## Setup (Poetry)
 ```bash
-cd /Users/homesachin/Desktop/zoneone/practice/ai-copilot
 cp .env.example .env
 ```
 
@@ -71,16 +104,6 @@ Optional: set real Databricks values in `.env`:
 - `DATABRICKS_VECTOR_SEARCH_INDEX`
 - `DATABRICKS_MODEL_SERVING_ENDPOINT`
 - `DATABRICKS_SQL_WAREHOUSE_ID`
-
-## Your Requested Bootstrap Command
-From project root:
-```bash
-./poet
-```
-This runs `poet_install_make_dev.sh`:
-- configures Poetry env
-- installs dependencies via `pyproject.toml`
-- runs `make dev-open`
 
 ## Make Commands
 ```bash
@@ -93,15 +116,8 @@ make docker-build # build image
 make docker-run   # run container locally
 ```
 
-## Run Locally (Fast path)
+## Run Locally
 ```bash
-cd /Users/homesachin/Desktop/zoneone/practice/ai-copilot
-./poet
-```
-
-Manual alternative:
-```bash
-cd /Users/homesachin/Desktop/zoneone/practice/ai-copilot
 poetry config --local virtualenvs.in-project true
 poetry install
 make dev-open
