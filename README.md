@@ -123,7 +123,7 @@ poetry install
 make dev-open
 ```
 
-## 60-120 Second Interview Demo Flow
+## Demo Flow
 1. Open `http://127.0.0.1:8000/`.
 2. Select role `analyst`, click `Get Demo Token`.
 3. Ask: `Fetch Jira tickets for engineering project`.
@@ -131,3 +131,60 @@ make dev-open
 5. Open `http://127.0.0.1:8000/dashboard` and click `Run Evaluation`.
 6. Mention fallback reliability and RBAC enforcement.
 
+## Role-Based Scenarios (What To Type)
+
+### 1) How to get DEMO_TOKEN
+- In chat UI (`/`):
+  - Select role from dropdown: `viewer`, `analyst`, `operator`, or `admin`
+  - Click `Get Demo Token`
+  - Expected UI message: `Token ready for role=<selected-role>`
+- Optional API:
+```bash
+curl "http://127.0.0.1:8000/auth/demo-token?user_id=demo-user&roles=analyst"
+```
+
+### 2) How to ask CoPilot / Stream and expected behavior
+- `viewer`
+  - Type: `Fetch Jira tickets for engineering project`
+  - Expected: tool call denied (`tool_output.status = denied`), retrieval answer still returned.
+  - Type: `Summarize incident communication policy from docs`
+  - Expected: RAG response from retrieved context.
+- `analyst`
+  - Type: `Fetch Jira tickets for engineering project`
+  - Expected: Jira tool allowed.
+  - Type: `Run SQL to check latest timestamp`
+  - Expected: SQL tool allowed.
+  - Type: `Trigger incident API now`
+  - Expected: denied (no trigger permission).
+- `operator`
+  - Type: `Trigger incident API now`
+  - Expected: trigger tool allowed.
+  - Type: `Run SQL to check latest timestamp`
+  - Expected: SQL tool allowed.
+- `admin`
+  - Type: any of the above prompts
+  - Expected: all tools allowed.
+  - Can run evaluation endpoint/dashboard.
+
+For `Ask Copilot` vs `Stream`:
+- `Ask Copilot`: returns full JSON response.
+- `Stream`: returns token-by-token text output.
+
+### 3) Open Evaluation Dashboard usage
+- Open `http://127.0.0.1:8000/dashboard`
+- Click `Run Evaluation`
+- Expected:
+  - Dashboard auto-generates `admin` demo token
+  - Runs golden dataset
+  - Shows output JSON with `avg_precision`, `avg_recall`, and per-sample `rows`
+
+## MLflow Evaluation: How to see results
+The dashboard is button-driven (no prompt needed there). To inspect MLflow UI:
+
+```bash
+env -u VIRTUAL_ENV -u POETRY_ACTIVE poetry run mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5001
+```
+
+Open `http://127.0.0.1:5001`, then check experiment `enterprise-ai-copilot`:
+- Metrics: `avg_precision`, `avg_recall`
+- Artifacts: evaluation results and trace-linked outputs
