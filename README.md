@@ -131,6 +131,3 @@ make dev-open
 5. Open `http://127.0.0.1:8000/dashboard` and click `Run Evaluation`.
 6. Mention fallback reliability and RBAC enforcement.
 
-One-liner:
-
-> I built a Databricks Mosaic AI agentic RAG copilot with Vector Search, UC-style tool calling, JWT RBAC, and MLflow evaluation for production-grade enterprise retrieval.
