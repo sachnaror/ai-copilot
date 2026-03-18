@@ -1,0 +1,40 @@
+{
+  "family": "enterprise-ai-copilot",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/enterprise-ai-copilot-task-role",
+  "containerDefinitions": [
+    {
+      "name": "enterprise-ai-copilot",
+      "image": "<ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/enterprise-ai-copilot:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "ENV", "value": "prod" },
+        { "name": "MLFLOW_EXPERIMENT_NAME", "value": "enterprise-ai-copilot" }
+      ],
+      "secrets": [
+        { "name": "DATABRICKS_HOST", "valueFrom": "arn:aws:ssm:<REGION>:<ACCOUNT_ID>:parameter/copilot/databricks_host" },
+        { "name": "DATABRICKS_TOKEN", "valueFrom": "arn:aws:ssm:<REGION>:<ACCOUNT_ID>:parameter/copilot/databricks_token" },
+        { "name": "JWT_SECRET_KEY", "valueFrom": "arn:aws:ssm:<REGION>:<ACCOUNT_ID>:parameter/copilot/jwt_secret" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/enterprise-ai-copilot",
+          "awslogs-region": "<REGION>",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "tickets": [
+    {
+      "key": "ENG-101",
+      "summary": "Production latency spike",
+      "status": "In Progress"
+    },
+    {
+      "key": "ENG-102",
+      "summary": "Retry storm in payment service",
+      "status": "Open"
+    }
+  ]
+}
