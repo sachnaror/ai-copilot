@@ -190,7 +190,7 @@ Open `http://127.0.0.1:5001`, then check experiment `enterprise-ai-copilot`:
 - Metrics: `avg_precision`, `avg_recall`
 - Artifacts: evaluation results and trace-linked outputs
 
-## Demo Media
+## Youtube Demo
 
 <a href="https://www.youtube.com/watch?v=5G9gYdbi9H4">
   <img src="./IMAGE/demo-thumbnail.png" alt="Watch Enterprise AI Copilot Demo on YouTube" width="338" style="max-width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;" />
