@@ -5,8 +5,9 @@ Enterprise knowledge is fragmented across PDFs, Jira, Slack, APIs, and SQL syste
 
 ## Solution
 
-I built a Databricks Mosaic AI agentic RAG copilot with Vector Search, UC-style tool calling, JWT RBAC, and MLflow evaluation for production-grade enterprise retrieval. So, basically a :Nice, this is a perfect use case to explain with restaurant analogy. Keep it simple like this:
+I built a Databricks Mosaic AI agentic RAG copilot with Vector Search, UC-style tool calling, JWT RBAC, and MLflow evaluation for production-grade enterprise retrieval.
 
+A perfect use case to explain with restaurant analogy.
 
 
 ## 🍽️ How it works (lemme explain it in Restaurant style)
