@@ -201,3 +201,7 @@ Open `http://127.0.0.1:5001`, then check experiment `enterprise-ai-copilot`:
 <img src="./IMAGE/evaluation-dashboard.png" alt="MLflow Evaluation dashboard view" width="600" style="max-width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block;" />
 
 <img src="./IMAGE/copilot-browser.png" alt="Enterprise AI Copilot browser demo view" width="600" style="max-width: 100%; aspect-ratio: 9 / 16; object-fit: cover; display: block;" />
+
+
+## License
+This project is proprietary and all rights are reserved. You are not allowed to copy, modify, distribute, or use this code without explicit written permission from the copyright holder. See [LICENSE](./LICENSE).

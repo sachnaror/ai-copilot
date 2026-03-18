@@ -3,6 +3,7 @@ name = "enterprise-ai-copilot"
 version = "0.1.0"
 description = "Enterprise AI Knowledge Copilot using FastAPI + Databricks Mosaic AI"
 authors = ["ZoneOne <dev@zoneone.local>"]
+license = "Proprietary"
 readme = "README.md"
 packages = [{ include = "app" }]
 
